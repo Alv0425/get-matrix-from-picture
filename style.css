@@ -1,0 +1,24 @@
+* {
+  box-sizing: border-box;
+}
+
+:root{
+  --dark: #252323ff;
+  --light: #f2f2f2ff;
+}
+
+body{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: Roboto, sans-serif;
+  background-color: var(--light);
+  min-height: 100vh;
+}
+
+.nonogram-creator{
+  display:flex;
+  gap: 20px;
+  flex-wrap:wrap;
+  justify-content: center;
+}
