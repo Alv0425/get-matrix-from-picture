@@ -22,3 +22,51 @@ body{
   flex-wrap:wrap;
   justify-content: center;
 }
+
+.nonogram-creator__navbar{
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.nonogram-creator__form{
+  display: flex;
+  gap: 10px;
+  padding: 20px 0;
+}
+
+.nonogram-creator__playboard{
+  max-width: 500px;
+  min-width: 300px;
+  flex-grow: 1;
+}
+
+.nonogram-creator__button{
+  background-color: transparent;
+  padding: 10px;
+  border: 2px solid var(--dark);
+  border-radius:20px;
+  cursor: pointer;
+}
+
+.nonogram-creator__label{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px;
+  min-width: 100px;
+  border: 2px solid var(--dark);
+  border-radius: 100px;
+}
+
+.nonogram-creator__input{
+  margin: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  min-width: 100px;
+  border: 1px solid var(--dark);
+  border-radius: 10px;
+}
