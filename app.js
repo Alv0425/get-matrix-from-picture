@@ -86,7 +86,9 @@ class Field {
 	}
 	// Тут можно изменить формат и содержание данных, получаемым при клике на кнопку GET MATRIX
   getMatrix(){
-    let matrix = this.cells.map((row) => row.map((cell) => cell.classList.contains('black') ? inputFilledCell.value : inputEmptyCell.value));
+    const black = inputFilledCell.value;
+    const white = inputEmptyCell.value;
+    let matrix = this.cells.map((row) => row.map((cell) => cell.classList.contains('black') ? black : white));
     navigator.clipboard.writeText(JSON.stringify(matrix));
     console.log('Матрица скопирована в буфер обмена', matrix);
 		const message = createNode('div',['nonogram-creator__message', 'fade-in-out']);
@@ -97,6 +99,7 @@ class Field {
 		}, 1000);
   }
 }
+
 
 
 function createNode(type, classlist, attrlist, content) {
@@ -124,4 +127,21 @@ function clearNode(node) {
 	while (node.firstChild) {
 		node.removeChild(node.firstChild);
 	}
+}
+
+form.oninput = (e) => {
+	clearNode(fieldCont);
+	const newField = new Field(e.target.value);
+	newField.drawField();
+  generateButton.onclick = () => {
+		newField.getMatrix();
+  }
+};
+
+
+clearNode(fieldCont);
+const newField = new Field(5);
+newField.drawField();
+generateButton.onclick = () => {
+  newField.getMatrix();
 }
