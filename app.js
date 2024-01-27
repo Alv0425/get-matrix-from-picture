@@ -49,7 +49,12 @@ class Field {
 	constructor(size) {
 		this.cells = [];
 		this.size = size;
-    this.mousedown = false;
+		this.mousedown = false;
+		this.isFirstCellFilled = false;
+	}
+
+	toggleCellFill(element) {
+		element.classList.toggle('black', this.isFirstCellFilled);
 	}
 
 	drawField() {
@@ -71,18 +76,22 @@ class Field {
 		});
 		nonogramPicture.append(...rows);
 		fieldCont.append(nonogramPicture);
-    nonogramPicture.addEventListener('click', (e) => {
-      e.target.classList.toggle('black');
-    });
-    addEventListener('mousedown', () => {
-      this.mousedown = !this.mousedown;
-    })
-    addEventListener('mouseup', () => {
-      this.mousedown = !this.mousedown;
-    })
-    addEventListener("mouseover", (e) => {
-      if (this.mousedown && e.target.classList.contains('cell')) e.target.classList.add('black');
-    });
+
+		nonogramPicture.addEventListener('mousedown', ({ target }) => {
+			this.mousedown = true;
+			this.isFirstCellFilled = !target.classList.contains('black');
+			this.toggleCellFill(target);
+		});
+
+		addEventListener('mouseup', () => {
+			this.mousedown = false;
+		});
+
+		nonogramPicture.addEventListener('mouseover', ({ target }) => {
+			if (this.mousedown && target.classList.contains('cell')) {
+				this.toggleCellFill(target);
+			}
+		});
 	}
 	// Тут можно изменить формат и содержание данных, получаемым при клике на кнопку GET MATRIX
   getMatrix(){
