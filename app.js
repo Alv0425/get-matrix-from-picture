@@ -86,13 +86,20 @@ class Field {
 	}
 	// Тут можно изменить формат и содержание данных, получаемым при клике на кнопку GET MATRIX
   getMatrix(){
-    const black = inputFilledCell.value;
-    const white = inputEmptyCell.value;
+    let black = inputFilledCell.value;
+    let white = inputEmptyCell.value;
+    const isNumber = (str) => {
+      return [...str].every((char) => '0123456789'.includes(char));
+    }
+    if (isNumber(black) && isNumber(white)) {
+      black = black * 1;
+      white = white * 1;
+    }
     let matrix = this.cells.map((row) => row.map((cell) => cell.classList.contains('black') ? black : white));
     navigator.clipboard.writeText(JSON.stringify(matrix));
     console.log('Матрица скопирована в буфер обмена', matrix);
 		const message = createNode('div',['nonogram-creator__message', 'fade-in-out']);
-		message.textContent = 'Matrix copied!'
+		message.textContent = 'Matrix copied to clipboard!'
 		navigationBar.append(message);
 		setTimeout(() => {
 			message.remove();

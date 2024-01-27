@@ -17,9 +17,9 @@ body{
 }
 
 .nonogram-creator{
-  display:flex;
+  display: flex;
   gap: 20px;
-  flex-wrap:wrap;
+  flex-wrap: wrap;
   justify-content: center;
 }
 
@@ -45,8 +45,17 @@ body{
   background-color: transparent;
   padding: 10px;
   border: 2px solid var(--dark);
-  border-radius:20px;
+  font-size: 16px;
+  border-radius: 20px;
   cursor: pointer;
+  transition: 0.3s;
+}
+
+@media (pointer:fine) and (hover:hover) {
+  .nonogram-creator__button:hover{
+    color: var(--light);
+    background-color: var(--dark);
+  }
 }
 
 .nonogram-creator__label{
@@ -100,6 +109,7 @@ body{
 .row{
   display:flex;
 }
+
 .row:nth-child(5){
   border-bottom: 2px var(--dark) solid;
 }
@@ -114,19 +124,19 @@ body{
 }
 
 .row:nth-child(5n + 5){
-  border-bottom: 4px var(--dark) solid;
+  border-bottom: 3px var(--dark) solid;
 }
 
-.row:last-child{
-  border-bottom: 1px var(--dark) solid;
+.row:nth-child(1){
+  border-top: 3px var(--dark) solid;
 }
 
 .cell:nth-child(5n + 5){
-  border-right: 4px var(--dark) solid;
+  border-right: 3px var(--dark) solid;
 }
 
-.cell:last-child{
-  border-right: 1px var(--dark) solid;
+.cell:nth-child(1){
+  border-left: 3px var(--dark) solid;
 }
 
 .nonogram {
