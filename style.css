@@ -70,3 +70,90 @@ body{
   border: 1px solid var(--dark);
   border-radius: 10px;
 }
+
+.nonogram-creator__message{
+  margin: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  min-width: 100px;
+}
+
+
+.nonogram-creator__radio{
+  display: none;
+}
+
+#size-5:checked ~ .nonogram-creator__label[for="size-5"],
+#size-10:checked ~ .nonogram-creator__label[for="size-10"],
+#size-15:checked ~ .nonogram-creator__label[for="size-15"]  {
+  background-color: var(--dark);
+  color: var(--light);
+}
+
+.container{
+  display: flex;
+  flex-direction:column;
+}
+
+.row{
+  display:flex;
+}
+.row:nth-child(5){
+  border-bottom: 2px var(--dark) solid;
+}
+
+.cell{
+  display: block;
+  aspect-ratio: 1 / 1;
+  flex-grow: 1;
+  background-color: transparent;
+  outline: none;
+  border: 1px var(--dark) solid;
+}
+
+.row:nth-child(5n + 5){
+  border-bottom: 4px var(--dark) solid;
+}
+
+.row:last-child{
+  border-bottom: 1px var(--dark) solid;
+}
+
+.cell:nth-child(5n + 5){
+  border-right: 4px var(--dark) solid;
+}
+
+.cell:last-child{
+  border-right: 1px var(--dark) solid;
+}
+
+.nonogram {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 1fr 2fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  width: 500px;
+}
+  
+@keyframes fadeinout {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.fade-in-out{
+  animation: fadeinout 1s linear forwards;
+}
+
+button.black{
+  background-color: var(--dark);
+}

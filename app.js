@@ -45,7 +45,58 @@ const inputFilledCell = createNode('input', ['nonogram-creator__input'], {
 });
 navigationBar.append(inputEmptyCellLabel,inputEmptyCell,inputFilledCellLabel,inputFilledCell)
 
+class Field {
+	constructor(size) {
+		this.cells = [];
+		this.size = size;
+    this.mousedown = false;
+	}
 
+	drawField() {
+		for (let i = 0; i < this.size; i++) {
+			const row = [];
+			for (let j = 0; j < this.size; j++) {
+				const newCell = createNode('button', ['cell'], { id: `${j}-${i}`});
+				row.push(newCell);
+			}
+			this.cells.push(row);
+		}
+		const nonogramField = createNode('div', ['nonogram']);
+		const nonogramPicture = createNode('div', ['container']);
+		nonogramField.append(nonogramPicture);
+		const rows = this.cells.map((row) => {
+			const newrow = createNode('div', ['row']);
+			newrow.append(...row);
+			return newrow;
+		});
+		nonogramPicture.append(...rows);
+		fieldCont.append(nonogramPicture);
+    nonogramPicture.addEventListener('click', (e) => {
+      e.target.classList.toggle('black');
+    });
+    addEventListener('mousedown', () => {
+      this.mousedown = !this.mousedown;
+    })
+    addEventListener('mouseup', () => {
+      this.mousedown = !this.mousedown;
+    })
+    addEventListener("mouseover", (e) => {
+      if (this.mousedown && e.target.classList.contains('cell')) e.target.classList.add('black');
+    });
+	}
+	// Тут можно изменить формат и содержание данных, получаемым при клике на кнопку GET MATRIX
+  getMatrix(){
+    let matrix = this.cells.map((row) => row.map((cell) => cell.classList.contains('black') ? inputFilledCell.value : inputEmptyCell.value));
+    navigator.clipboard.writeText(JSON.stringify(matrix));
+    console.log('Матрица скопирована в буфер обмена', matrix);
+		const message = createNode('div',['nonogram-creator__message', 'fade-in-out']);
+		message.textContent = 'Matrix copied!'
+		navigationBar.append(message);
+		setTimeout(() => {
+			message.remove();
+		}, 1000);
+  }
+}
 
 
 function createNode(type, classlist, attrlist, content) {
